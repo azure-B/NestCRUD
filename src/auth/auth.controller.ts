@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreateUserDTO, findUserDTO, updateUserDTO } from './dto/user.dto';
 import { AuthService } from './auth.service';
 
@@ -21,8 +30,13 @@ export class AuthController {
     return this.authService.findOne(userId);
   }
 
-  @Post('update')
+  @Patch('update')
   update(@Body() dto: updateUserDTO) {
     return this.authService.update(dto);
+  }
+
+  @Delete(':id')
+  delete(@Param() id: number) {
+    return this.authService.delete(id);
   }
 }

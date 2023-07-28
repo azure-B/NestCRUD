@@ -34,4 +34,10 @@ export class AuthService {
     await this.userRepo.save(update);
     return update;
   }
+
+  async delete(id: number) {
+    const findOne = await this.userRepo.find({ where: { id } });
+
+    return this.userRepo.remove(findOne);
+  }
 }
